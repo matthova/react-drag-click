@@ -118,6 +118,8 @@ export default class App extends Component {
     return (
       <div className="demo8">
         <button onClick={this.randomizeArray}>Shake it up!</button>
+        <br />
+        <br />
         {this.state.items.map((item, i) => {
           const style =
             originalPosOfLastPressed === i && isPressed
@@ -166,6 +168,9 @@ export default class App extends Component {
             </Motion>
           );
         })}
+        <footer>
+          <a href="https://github.com/matthova/react-drag-click">Github</a>
+        </footer>
       </div>
     );
   }

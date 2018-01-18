@@ -67,3 +67,11 @@
   background: black;
   margin: 3px 0px;
 }
+
+footer {
+  height: 24px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
