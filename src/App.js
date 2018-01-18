@@ -3,7 +3,6 @@ import { Motion, spring } from 'react-motion';
 import { range } from 'lodash';
 import autobind from 'react-autobind';
 import './App.css';
-import drag from './drag.svg';
 
 function reinsert(arr, from, to) {
   const _arr = arr.slice(0);
@@ -32,6 +31,7 @@ export default class App extends Component {
       originalPosOfLastPressed: 0,
       order: range(items.length),
       items,
+      height: 35,
     };
 
     autobind(this);
@@ -69,7 +69,11 @@ export default class App extends Component {
 
     if (isPressed) {
       const mouseY = pageY - topDeltaY;
-      const currentRow = clamp(Math.round(mouseY / 100), 0, this.state.items.length - 1);
+      const currentRow = clamp(
+        Math.round(mouseY / this.state.height),
+        0,
+        this.state.items.length - 1,
+      );
       let newOrder = order;
 
       if (currentRow !== order.indexOf(originalPosOfLastPressed)) {
@@ -84,7 +88,7 @@ export default class App extends Component {
     this.setState({ isPressed: false, topDeltaY: 0 });
   }
 
-  randomize() {
+  randomizeArray() {
     const order = Object.assign([], this.state.order);
 
     let currentIndex = order.length;
@@ -113,7 +117,7 @@ export default class App extends Component {
 
     return (
       <div className="demo8">
-        <button onClick={this.randomize}>Shake it up!</button>
+        <button onClick={this.randomizeArray}>Shake it up!</button>
         {this.state.items.map((item, i) => {
           const style =
             originalPosOfLastPressed === i && isPressed
@@ -125,7 +129,7 @@ export default class App extends Component {
               : {
                   scale: spring(1, springConfig),
                   shadow: spring(1, springConfig),
-                  y: spring(order.indexOf(i) * 100, springConfig),
+                  y: spring(order.indexOf(i) * this.state.height, springConfig),
                 };
           return (
             <Motion style={style} key={i}>
@@ -140,22 +144,19 @@ export default class App extends Component {
                   }}
                 >
                   <div
+                    role="select"
+                    onMouseDown={this.handleMouseDown.bind(null, i, y)}
+                    onTouchStart={this.handleTouchStart.bind(null, i, y)}
                     style={{
+                      width: '30px',
                       display: 'inline',
-                      background: 'red',
+                      float: 'left',
+                      padding: '0 3px',
                     }}
                   >
-                    <img
-                      id="image"
-                      src={drag}
-                      alt="drag icon"
-                      onMouseDown={this.handleMouseDown.bind(null, i, y)}
-                      onTouchStart={this.handleTouchStart.bind(null, i, y)}
-                      style={{
-                        maxWidth: 30,
-                        padding: '28px 0 28px 30px',
-                      }}
-                    />
+                    <div className="drag-div" />
+                    <div className="drag-div" />
+                    <div className="drag-div" />
                   </div>
                   <p style={{ display: 'inline' }} className="unselectedable">
                     {item}

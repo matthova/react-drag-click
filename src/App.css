@@ -27,17 +27,19 @@
 .demo8-item {
   position: absolute;
   width: 320px;
-  height: 90px;
+  height: 30px;
   overflow: visible;
   pointer-events: auto;
   transform-origin: 50% 50% 0px;
   border-radius: 4px;
   color: rgb(153, 153, 153);
-  line-height: 96px;
+  line-height: 24px;
   font-size: 24px;
   font-weight: 400;
   background-color: rgb(255, 255, 255);
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   -webkit-box-sizing: border-box;
 }
 .link {
@@ -57,4 +59,11 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.drag-div {
+  width: 30px;
+  height: 2px;
+  background: black;
+  margin: 3px 0px;
 }
