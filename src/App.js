@@ -139,17 +139,24 @@ export default class App extends Component {
                     zIndex: i === originalPosOfLastPressed ? 99 : i,
                   }}
                 >
-                  <img
-                    src={drag}
-                    alt="drag icon"
-                    onMouseDown={this.handleMouseDown.bind(null, i, y)}
-                    onTouchStart={this.handleTouchStart.bind(null, i, y)}
+                  <div
                     style={{
-                      maxWidth: 30,
                       display: 'inline',
-                      padding: '28px 0 28px 30px',
+                      background: 'red',
                     }}
-                  />
+                  >
+                    <img
+                      id="image"
+                      src={drag}
+                      alt="drag icon"
+                      onMouseDown={this.handleMouseDown.bind(null, i, y)}
+                      onTouchStart={this.handleTouchStart.bind(null, i, y)}
+                      style={{
+                        maxWidth: 30,
+                        padding: '28px 0 28px 30px',
+                      }}
+                    />
+                  </div>
                   <p style={{ display: 'inline' }} className="unselectedable">
                     {item}
                   </p>
